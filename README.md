@@ -4,4 +4,4 @@ Private project to test Githubs GraphQL API.
 
 ## Todo
 
-- Implement redux for topbar.
+- Use GraphQL caching for local state management.
