@@ -1,12 +1,24 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { ApolloProvider } from "@apollo/react-hooks";
+import ApolloClient from "apollo-boost";
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// Semantic UI styling
+import 'semantic-ui-css/semantic.min.css'
+
+import App from "./components/app";
+
+const client = new ApolloClient({
+    uri: "https://api.github.com/graphql",
+    headers: {
+        Authorization: "token 5e576eff68aa824f75f5b5bfb42a350a8026e4fe"
+    }
+});
+
+ReactDOM.render(
+    <ApolloProvider client={client}>
+        <App />
+    </ApolloProvider>
+    , document.getElementById("root")
+);
