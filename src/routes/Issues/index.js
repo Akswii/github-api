@@ -6,7 +6,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 const GET_ISSUES = gql`
-    query RespositoryIssues(){
+    query {
         repository(owner:"yarnpkg", name:"yarn") {
             issues(first: 5){
                 nodes{
