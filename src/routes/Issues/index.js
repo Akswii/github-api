@@ -1,13 +1,15 @@
 import React from "react";
 
-import IssueCard from "../../components/issue-card";
-
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
+import IssueCard from "../../components/issue-card";
+import { Input } from "semantic-ui-react";
+import { SearchRepo } from "../../components/search";
+
 const GET_ISSUES = gql`
-    query {
-        repository(owner:"yarnpkg", name:"yarn") {
+    query getRepoIssues($owner: String!, $name: String!) {
+        repository(owner: $owner, name: $name) {
             issues(first: 5){
                 nodes{
                     id,
@@ -18,10 +20,10 @@ const GET_ISSUES = gql`
             }
         }
     }
-`
+`;
 
 const Issues = () => {
-    const { loading, error, data } = useQuery(GET_ISSUES);
+    const { loading, error, data } = useQuery(GET_ISSUES, { variables: { owner: "yarnpkg", name: "yarn" } });
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>{error.message}</p>
@@ -30,10 +32,26 @@ const Issues = () => {
 
     return (
         <>
-            {
-                issues.map((issue) => <IssueCard key={issue.id} title={issue.title} bodyText={issue.bodyText} link={issue.url} />)
-            }
-            <IssueCard title="Test" bodyText="Test text" link="test link" />
+            <div className="ui grid container">
+                <div className="column">
+                    {/* <Input
+                        icon={{ name: 'search', circular: true, link: true }}
+                        placeholder='Search...'
+                    /> */}
+                    <SearchRepo />
+                </div>
+                <div className="ui grid">
+                    {
+                        issues.map((issue, i) => {
+                            return (
+                                <div className="four wide column" key={issue.id}>
+                                    <IssueCard title={issue.title} bodyText={issue.bodyText} link={issue.url} />
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
         </>
     );
 }
