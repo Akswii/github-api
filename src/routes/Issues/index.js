@@ -10,7 +10,7 @@ import { SearchRepo } from "../../components/search";
 const GET_ISSUES = gql`
     query getRepoIssues($owner: String!, $name: String!) {
         repository(owner: $owner, name: $name) {
-            issues(first: 5){
+            issues(last: 5){
                 nodes{
                     id,
                     title,
