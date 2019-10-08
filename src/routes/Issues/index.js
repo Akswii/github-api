@@ -4,7 +4,6 @@ import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 
 import IssueCard from "../../components/issue-card";
-import { Input } from "semantic-ui-react";
 import { SearchRepo } from "../../components/search";
 
 const GET_ISSUES = gql`
@@ -32,12 +31,8 @@ const Issues = () => {
 
     return (
         <>
-            <div className="ui grid container">
+            <div className="ui grid">
                 <div className="column">
-                    {/* <Input
-                        icon={{ name: 'search', circular: true, link: true }}
-                        placeholder='Search...'
-                    /> */}
                     <SearchRepo />
                 </div>
                 <div className="ui grid">

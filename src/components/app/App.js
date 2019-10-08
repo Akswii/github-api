@@ -11,8 +11,10 @@ import Issues from "../../routes/Issues";
 const App = () => (
     <Router>
         <TopbarMenu />
-        <Route exact path="/" component={Home} />
-        <Route exact path="/Issues" component={Issues} />
+        <div className="ui container">
+            <Route exact path="/" component={Home} />
+            <Route exact path="/Issues" component={Issues} />
+        </div>
     </Router>
 );
 

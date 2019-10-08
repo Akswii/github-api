@@ -5,26 +5,29 @@ import { useLazyQuery } from "@apollo/react-hooks";
 import { Input, Icon } from "semantic-ui-react";
 
 export const SearchRepo = () => {
-    const [userResult, setUserResult] = useState({});
+    const [userResult, setUserResult] = useState(null);
 
-    const [getUsers, { loading, error, data }] = useLazyQuery(FIND_USER);
+    const [getUsers, { loading, error }] = useLazyQuery(
+        FIND_USER,
+        {
+            onCompleted: data => {
+                console.log(data.search.nodes);
+                setUserResult(data.search.nodes);
+            }
+        }
+    );
 
     if (loading) { return <p>Loading...</p> }
     if (error) { return <p>{error.message}</p> }
-
-    console.log(data);
-
-    const handleSearchResult = (e) => {
-        getUsers({ variables: { name: document.getElementById("owner-search").value } });
-    }
 
     return (
         <>
             <Input
                 id="owner-search"
                 placeholder='Search...'
-                icon={<Icon name='search' inverted circular link onClick={handleSearchResult} />}
+                icon={<Icon name='search' inverted circular link onClick={() => getUsers({ variables: { name: document.getElementById("owner-search").value } })} />}
             />
+            {userResult && userResult.map(({ name }) => <p>{name}</p>)}
         </>
     );
 };
