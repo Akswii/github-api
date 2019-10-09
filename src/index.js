@@ -23,8 +23,7 @@ const client = new ApolloClient({
 
 cache.writeData({
     data: {
-        active: "home",
-        content: ""
+        active: "home"
     }
 })
 

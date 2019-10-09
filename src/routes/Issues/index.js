@@ -32,20 +32,20 @@ const Issues = () => {
     return (
         <>
             <div className="ui grid">
-                <div className="column">
+                <div className="ui sixteen wide column">
                     <SearchRepo />
                 </div>
-                <div className="ui grid">
+                {/* <div className="ui sixteen wide column grid">
                     {
                         issues.map((issue, i) => {
                             return (
                                 <div className="four wide column" key={issue.id}>
-                                    <IssueCard title={issue.title} bodyText={issue.bodyText} link={issue.url} />
+                                    <IssueCard title={issue.title} link={issue.url} />
                                 </div>
                             )
                         })
                     }
-                </div>
+                </div> */}
             </div>
         </>
     );
