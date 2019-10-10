@@ -5,8 +5,8 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
-// Semantic UI styling
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
+
 import { AUTH_TOKEN } from "./constants";
 import App from "./components/app";
 
